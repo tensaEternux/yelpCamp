@@ -1,0 +1,107 @@
+body {
+  background-color: #000;
+}
+
+#landing-header {
+	/* it is like z axis and z-index = 1 will bring the content forward which means that it */
+		/* will be forward to everything whose z-index < 1 */
+  z-index: 1;
+	/* by default, it is static and z-index won't work therefore we have to change it to relative */
+  position: relative;
+	/* horizontally center */
+  text-align: center;
+	/* to set it vertically (vh = view height) */
+  padding-top: 40vh;
+}
+
+#landing-header h1 {
+  color: #fff;
+}
+
+.slideshow { 
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+	/* background images are behind the other content */
+  z-index: 0;
+	/* this will remove the bullet points */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slideshow li { 
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+	/* this will allow the image to take the entire space on the page */
+  background-size: cover;
+	/* this will center the image perfectly */
+  background-position: 50% 50%;
+	/* image won't repeat vertically or horizontally */
+  background-repeat: no-repeat;
+	/* we want our image to start as faded out */
+  opacity: 0;
+  z-index: 0;
+	/* this will be responsible for animation first argument is just name of the animation and is arbitrary */
+		/* after that we tell the animation to last for 50 seconds */
+		/* after we tell the animation to be linear so that it remains at same speed from beginning to end */
+  	/* lastly we tell our animation to loop infinitely so that slideshow never ends */
+	animation: imageAnimation 50s linear infinite; 
+}
+
+.slideshow li:nth-child(1) { 
+  background-image: url(http://i.imgur.com/K3mPv14.jpg);
+	/* we don't need animation delay like others for the first image as it will start immediately */
+}
+.slideshow li:nth-child(2) { 
+  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  animation-delay: 10s; 
+}
+.slideshow li:nth-child(3) { 
+  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  animation-delay: 20s; 
+}
+.slideshow li:nth-child(4) { 
+  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  animation-delay: 30s; 
+}
+.slideshow li:nth-child(5) { 
+  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+  animation-delay: 40s; 
+}
+
+/* @keyframe is a selector and imageAnimation is a name that is given above in .slideshow li */
+@keyframes imageAnimation { 
+	/* from 0% to 10% 1st image is fading in */
+  0% { 
+    opacity: 0; 
+    animation-timing-function: ease-in;
+  }
+	/* from 10% to 20% 1st image remains solid */
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+	/* from 20% to 30% 1st image is fading out and 2nd image is fading in */
+  20% {
+    opacity: 1
+  }
+	/* from 30% to 40% 2nd image remains solid */
+  30% {
+    opacity: 0
+  }
+	/* from 40% to 50% 2nd image is fading out and 3rd image is fading in */
+	/* this goes on till we reach */
+	/* from 90% to 100% 5th image remains solid and the cycle repeats itself*/
+}
+
+/* Older browser support - .no-cssanimations class added by modernizr */
+.no-cssanimations .slideshow li {
+	/* for older browsers with no css animations the first image will remain static */
+	opacity: 1;
+}

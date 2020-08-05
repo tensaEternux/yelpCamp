@@ -1,0 +1,39 @@
+<%- include ("../partials/header") %>
+
+<!-- adding max-width:75% because the container default width is small and doesn't look good -->
+<div class="container">	
+	<header class="jumbotron">
+		<!-- adding another div with class container down below as there was on space between text and the -->
+		<!-- jumbotron border when the website went small like phone display -->
+		<!-- (may not see change but colt steele did it so I did it too) -->
+		<div class="container">
+			<!-- the header will not make the text below bigger without class display-3 and so on, so add it -->
+			<h1 class="display-3">Welcome to YelpCamp!</h1>
+			<p class="lead">We have collection of best campgrounds in the world</p>
+			<p>
+				<a href="/campgrounds/new" class="btn btn-primary">Add a new Campground</a>
+			</p>
+		</div>
+	</header>
+
+	<div class="row text-center" style="display:flex; flex-wrap:wrap;">
+		<% campgrounds.forEach(function(campground) { %>
+		<!-- col-{breakpoint}-how much to take before that out of 12-->
+			<div class="col-xl-3 col-lg-6 col-sm-6" style="margin-bottom:20px;">
+				<div class="img-thumbnail">
+					<!-- image will show full in this so we need to fit the image in thumbnail and to do this -->
+          <!-- we need to style the img tag with width:100% for it to work -->
+					<img style="width: 100%;" src="<%= campground.image %>">
+					<div class="caption">
+						<h4><%= campground.name %></h4>
+					</div>
+					<p>
+						<a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">More Info!</a>
+					</p>
+				</div>
+			</div>
+		<% }) %>
+	</div>
+</div>
+
+<%- include ("../partials/footer") %>
